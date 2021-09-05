@@ -2,7 +2,8 @@ import {
   SELECT_BREED,
   FETCH_BREEDS,
   FETCH_BREED_IMAGES,
-  FETCH_RANDOM_IMAGES
+  FETCH_RANDOM_IMAGES,
+  SAVE_VOTE
 } from "../actions/actionTypes";
 
 const initialBreedState = {
@@ -11,7 +12,8 @@ const initialBreedState = {
   images: [],
 };
 
-const initialRandomBreedImageState = {
+const initialBreedVotesReducer = {
+  votes: [],
   images: []
 }
 
@@ -28,15 +30,15 @@ export const breedsReducer = (state = initialBreedState, { type, payload }) => {
   }
 };
 
-export const randomBreedImageReducer = (
-  state = initialRandomBreedImageState,
+export const breedVotesReducer = (
+  state = initialBreedVotesReducer,
   { type, payload }
 ) => {
   switch (type) {
     case FETCH_RANDOM_IMAGES:
       return { ...state, images: payload };
-    // case VOTE_IMAGE: 
-    //   return {...state }
+    case SAVE_VOTE: 
+      return {...state, votes: payload }
     default:
       return state;
   }

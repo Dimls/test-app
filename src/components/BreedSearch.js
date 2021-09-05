@@ -7,7 +7,6 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import * as actions from "../store/actions/index";
-import { Typography } from "@material-ui/core";
 
 const BreedSearch = () => {
   const {

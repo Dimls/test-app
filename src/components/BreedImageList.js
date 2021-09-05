@@ -4,25 +4,44 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import Button from "@material-ui/core/Button";
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 import ThumbDownIcon from "@material-ui/icons/ThumbDown";
+import AutorenewIcon from "@material-ui/icons/Autorenew";
 import ImageList from "@material-ui/core/ImageList";
 import ImageListItem from "@material-ui/core/ImageListItem";
-import ImageListItemBar from "@material-ui/core/ImageListItemBar";
 import * as actions from "../store/actions/index";
 
 const BreedImageList = () => {
-  const { images } = useSelector((state) => state.randomBreedImageReducer);
+  const { images, votes } = useSelector((state) => state.breedVotesReducer);
   const isLoading = useSelector((state) => state.loadingReducer);
   const dispatch = useDispatch();
 
+  console.log(votes)
+
   useEffect(() => {
-    dispatch(actions.fetchRandomImages());
+    if (images.length === 0) {
+      dispatch(actions.fetchRandomImages());
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleClick =  (val, id) => {
-      console.log(val)
-      dispatch(actions.voteImage(val, id))
-    // dispatch(actions.selectBreed(e.target.value, breeds))
+  const handleVoteClick = (val, breeds) => {
+
+     votes.forEach( (v) => {
+         breeds.forEach( (b) => {
+            if(b.name === v.name){
+                if(val=== 1){
+                  v.positive ++
+                }
+                else{
+                  v.negative ++
+                }
+            }
+         })
+     })
+     dispatch(actions.saveVote(votes))
+  };
+
+  const handleLoadMoreClick = () => {
+    dispatch(actions.fetchRandomImages());
   };
 
   return (
@@ -32,24 +51,29 @@ const BreedImageList = () => {
       ) : (
         <>
           <ImageList rowHeight={180} cols={3}>
-            {images.map(({id, url}) => (
-              <ImageListItem  key={id}>
-                  <ThumbUpIcon onClick={() => handleClick(1, id)} color="primary"/>
-                  <ThumbDownIcon onClick={() => handleClick(0, id)}  color="secondary"/>
+            {images.map(({  url, breeds, id }) => (
+              <ImageListItem key={id}>
+                <ThumbUpIcon
+                  onClick={() => handleVoteClick(1, breeds)}
+                  color="primary"
+                />
+                <ThumbDownIcon
+                  onClick={() => handleVoteClick(0, breeds)}
+                  color="secondary"
+                />
                 <img src={url} alt={url} />
-                {/* <ImageListItemBar
-                  title={'TEST'}
-                  subtitle={<span>by: </span>}
-                  actionIcon={
-                    <IconButton
-                      aria-label={`info `}
-                    >
-                    </IconButton>
-                  }
-                />  */}
               </ImageListItem>
             ))}
           </ImageList>
+          <Button
+            onClick={() => handleLoadMoreClick()}
+            className="load-more-btn"
+            variant="contained"
+            color="primary"
+            startIcon={<AutorenewIcon />}
+          >
+            MORE
+          </Button>
         </>
       )}
     </>

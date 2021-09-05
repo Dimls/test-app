@@ -1,9 +1,9 @@
 import { combineReducers } from "redux";
-import {breedsReducer, randomBreedImageReducer} from "./breedsReducer";
+import {breedsReducer, breedVotesReducer} from "./breedsReducer";
 import {loadingReducer} from "./loadingReducer";
 
 export default combineReducers({
     breedsReducer,
-    randomBreedImageReducer,
+    breedVotesReducer,
     loadingReducer
 });
