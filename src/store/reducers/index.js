@@ -1,6 +1,8 @@
 import { combineReducers } from "redux";
+import {breedsReducer} from "./breedsReducer";
+import {loadingReducer} from "./loadingReducer";
 
-
-// export default combineReducers({
-//     1: 1
-// });
+export default combineReducers({
+    breedsReducer,
+    loadingReducer
+});

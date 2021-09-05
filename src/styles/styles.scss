@@ -1,6 +1,29 @@
 body,
 html {
-  div.App {
-    height: 100%;
+  margin: 0;
+  div#root {
+    // form.searchbar {
+    //   width: 100%;
+    //   max-width: 500px;
+    //   div,
+    //   input {
+    //     width: inherit;
+    //   }
+    // }
+    div.box-content {
+      border: 2px solid lightgray;
+      border-radius: 0 0 10px 10px;
+      display: flex;
+      flex-wrap: wrap;
+      text-align: center;
+      justify-content: center;
+      div.carousel {
+        width: 100%;
+      }
+      div.MuiFormControl-root {
+        margin-bottom: 2rem;
+        width: 100px;
+      }
+    }
   }
 }
