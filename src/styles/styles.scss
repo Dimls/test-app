@@ -2,14 +2,6 @@ body,
 html {
   margin: 0;
   div#root {
-    // form.searchbar {
-    //   width: 100%;
-    //   max-width: 500px;
-    //   div,
-    //   input {
-    //     width: inherit;
-    //   }
-    // }
     div.box-content {
       border: 2px solid lightgray;
       border-radius: 0 0 10px 10px;
@@ -23,6 +15,25 @@ html {
       div.MuiFormControl-root {
         margin-bottom: 2rem;
         width: 100px;
+      }
+      div.breed-details {
+        display: flex;
+        flex-wrap: wrap;
+        text-align: left;
+        span {
+          margin-bottom: 1rem;
+        }
+      }
+      ul.MuiImageList-root {
+        svg {
+          position: absolute;
+          cursor: pointer;
+          z-index: 1000;
+          right: 0;
+          &.MuiSvgIcon-colorPrimary {
+            right: 2rem;
+          }
+        }
       }
     }
   }
