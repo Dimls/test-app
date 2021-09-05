@@ -14,8 +14,6 @@ const BreedImageList = () => {
   const isLoading = useSelector((state) => state.loadingReducer);
   const dispatch = useDispatch();
 
-  console.log(votes)
-
   useEffect(() => {
     if (images.length === 0) {
       dispatch(actions.fetchRandomImages());
